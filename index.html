@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.js">
+    <!-- Start: normalize basically evens out the differences between different websites-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <!-- End: normalize basically evens out the differences between different websites-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpvbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fontawesome.com/search?s=solid%2Cbrands">
+
+    <title> Chris Portfolio Website </title>
+</head>
+<body>
+    <!-- Start: Header-->
+    <header>
+        <div class="logo">
+            <a href="#home"><img src="navImage2.jpeg" alt=""></a>
+        </div>
+        <button class="nav-toggle" aria-label="toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
+                <li class="nav__item"><a href="#about" class="nav__link">About me</a></li>
+                <li class="nav__item"><a href="#work" class="nav__link">My Work</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!--End: Header -->
+    
+    <!--Start: Introduction -->
+    <section class="intro" id="home">
+        <h1 class="section__title section__title--intro">
+            Hi, I am <strong>Chris Mehn</strong>
+        </h1>
+        <p class="section__subtitle section__subtitle--intro"> Software Developer </p>
+        <img src="chris1.jpeg" alt="Picture of Chris" class="intro__img">
+    </section>
+    <!--End: Introduction -->
+
+    
+    <!--Start: My services -->
+    <section class="my-services" id="services">
+        <h2 class="section__title section__title--services">What I do</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Web Development</h3>
+                <p>I put my knowledge of several programming languages to develope web pages from very scratch. Computer languages such as <strong>HTML, CSS, JavaScript, and React</strong> greatly aid me in expressing my vision and controlling what happens with the work I developed.</p>
+            </div> 
+            
+            <div class="service">
+                <h3>Data Analysis</h3>
+                <p>As it pertains to the <strong>Data Science</strong> aspect of programming, I have a unique enthusiasm to solving problems. I mainly program using python when analyzing and dissecting data.</p>
+            </div> 
+            
+            <div class="service">
+                <h3>Mobile Development</h3>
+                <p>Though I am not as fluent in <strong>Mobile Development</strong> as I am in the previously mention areas, I am currently working to better myself at Java and Swift. By learning these languages, I hope to create better mobile apps that will be useful in aiding others in their daily lives.</p>
+            </div> 
+        </div> 
+        
+        <a href="#work" class="btn">My Work</a>
+    </section>
+    <!--End: My services -->
+
+    <!--Start: About me -->
+    <section class="about-me" id="about">
+        <h2 class="section__title section__title--about">Who I am</h2>
+        <p class="section__subtitle section__subtitle--about"></p>
+        
+        <div class="about-me__body">
+            <p> From a very young age, I have always been passionate about helping others. Through my talent of programming, I deem myself very fortunate to be able to solve real world, complicated problems through the lences of Computer Programming. </p>
+            <p> In a rare occurancy, I combined my love of Computer Science with my natural talent of effective communication by obtaining a B.A in Interdisplinary with emphasis in Computer Science and Communication Studies. </p>
+            <p> Through my degree, I aspire to present myself as a Software Developer who can effectively collaborate with others to develope groundbreaking software. </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem suscipit, architecto eos consectetur deserunt obcaecati iste totam ratione perspiciatis illum nihil nulla voluptate! Doloribus quis libero mollitia distinctio laudantium nam?</p>
+        </div>
+        
+        <img src="chris4.jpeg" alt="chris blue">
+     </section>
+     <!--End: About me-->
+
+     <!--Start: Development model -->
+     <div class="dev-process">
+         <p> Often when working on a project, I align my process with the <strong> Agile </strong>development model</p>
+        <img src="software1.png" alt="development model" class="dev-process__pic">
+    </div>
+    <!--End: Development model -->
+
+
+     <!--Start: My Work -->
+     <section class="my-work" id="work">
+         <h2 class="section__title">My work</h2>
+         <p class="section__subtitle"></p>
+
+        <!-- 1st portfolio img -->
+         <div class="portfolio">
+             <a href="chrisFootball.html" class="portfolio__item">
+                 <img src="chrisFootball1.jpeg" alt="" class="portfolio__img">
+                 <p> Football Non-Profit Page </p>
+             </a>
+         </div>
+
+        <!-- 2st portfolio img -->
+        <div class="portfolio">
+            <a href="chrisSoccer.html" class="portfolio__item">
+                <img src="chrisSoccer2.png" alt="" class="portfolio__img">
+                <p> Soccer Non-Profit Page</p>
+            </a>
+        </div>
+
+        <!-- 3st portfolio img -->
+        <div class="portfolio">
+            <a href="chrisWebDev.html" class="portfolio__item">
+                <img src="software2.webp" alt="" class="portfolio__img">
+                <p> Software Development Page </p> 
+            </a>
+        </div>
+
+     </section>
+    <!--End: My Work -->
+
+
+        <!--Start: Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:chrisdawolo@gmail.com" class="footer__link">Contact Me</a>
+            <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://codepen.io">
+                        <i class="fab fa-codepen"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/christopher-mehn-a42105104/">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://twitter.com">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+        <!--End: Footer -->
+        
+        
+        <script src="js/index.js"></script>
+    
+</body>
+</html>

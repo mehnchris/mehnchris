@@ -1,0 +1,44 @@
+
+
+.nav-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightcoral;
+}
+.nav-title ul
+{
+    list-style: none;
+    display: flex;
+    column-gap: 30px;
+    
+}
+.nav-title ul li 
+{
+    display: inline-block;
+    text-decoration: none;
+    color: yellow;
+    position: relative;
+}
+.nav-title ul li a
+{
+    padding: 10px;
+}
+.nav-title::after
+{
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 2px;
+    background-color: black;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .5s;
+}
+.nav-title:hover::after
+{
+    transform: scaleX(1);
+    transform-origin: left;
+
+}
