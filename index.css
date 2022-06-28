@@ -465,12 +465,13 @@ header
     left: 0;
     bottom: 0;
     width: 100%;
-    background: var(--clr-dark);
-    color: var(--clr-accent);
+    background: var(--clr-accent);
+    color: var(--clr-dark);
 }
 .footer li
 {
     list-style-type: none;
+    display: flex;
 }
 /* End: Footer */
 
