@@ -205,8 +205,9 @@ header
 
 .hamburger
 {
-    display: block;
+    display: flex;
     position: relative;
+
 }
 .hamburger,
 .hamburger::before,
@@ -493,5 +494,11 @@ header
 {
     background-color: #222;
     color: #e6e6e6;
+}
+.resume-button
+{
+    margin-left: 5em;
+    margin-right: 5em;
+    animation: spin 3s linear infinite;
 }
 
