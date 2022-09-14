@@ -497,8 +497,8 @@ header
 }
 .resume-button
 {
-    margin-left: 5em;
-    margin-right: 5em;
+    margin-left: 33em;
+    margin-right: 30em;
     animation: spin 3s linear infinite;
 }
 
