@@ -153,7 +153,7 @@ header
 }
 .logo
 {
-    max-width: 150px;
+    max-width: 140px;
 }
 .nav
 {
@@ -348,6 +348,10 @@ header
         margin-left: 2em;
     }
 }
+.services h3
+{
+    text-decoration: underline;
+}
 /* End: My services */
 
 
@@ -462,17 +466,19 @@ header
 /* Start: Footer */
 .footer 
 {
-    position: relative;
-    left: 0;
-    bottom: 0;
     width: 100%;
     background: var(--clr-accent);
-    color: var(--clr-dark);
+    /*color: var(--clr-dark);*/
 }
 .footer li
 {
     list-style-type: none;
     display: flex;
+}
+.footer__link
+{
+    padding-left: 10em;
+    padding-right: 10em;
 }
 /* End: Footer */
 
@@ -495,10 +501,40 @@ header
     background-color: #222;
     color: #e6e6e6;
 }
-.resume-button
+
+.resume-visit
 {
-    margin-left: 33em;
-    margin-right: 30em;
-    animation: spin 3s linear infinite;
+    text-align: center;
+    position: relative;
+}
+.resume-visit h3
+{
+    background: white;
+}
+/*this is for resume page*/
+.objective h2
+{
+    text-decoration: underline;
+}
+.objective p
+{
+    text-align: center;
+}
+
+h3
+{
+    position: relative;
+    top: .75rem;
+    display: inline-block;
+    padding: 0 0.4rem;
+}
+.line
+{
+    border-bottom: 2px solid black;
+}
+
+hr 
+{
+    border: 1px solid red;
 }
 
