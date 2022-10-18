@@ -438,6 +438,11 @@ header
     margin: auto;
     background: var(--clr-accent);
 }
+.portfolio-item-individual h1
+{
+    text-transform: uppercase;
+    text-decoration: underline;
+}
 .portfolio-item-individual__img
 {
     height: 600px;
