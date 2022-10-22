@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fontawesome.com/search?s=solid%2Cbrands">
+    
 
     <title> Chris Portfolio Website </title>
 </head>
@@ -23,7 +24,13 @@
         <div class="logo">
             <a href="#home"><img src="navImage2.jpeg" alt=""></a>
         </div>
+          <!-- start: Greetings notification -->
+ <div class="notification">
+            <p> Welcome Back, Lil Topha, reminder that your true <strong>value</strong> is in <u><strong>Jesus Christ</strong></u>!</p>
+            <span class="progress"></span>
 
+        </div>
+    <!-- End: Greetings notification -->
         <button class="nav-toggle" aria-label="toggle navigation">
             <span class="hamburger"></span>
         </button>
@@ -38,6 +45,13 @@
         </nav>
     </header>
     <!--End: Header -->
+
+
+    <!-- Start: clock --> 
+    <div id ="clock" onload="currentTime()" class="clock"></div>
+    <script src="clock.js"></script>
+    <!-- End: clock -->
+
     
     <!--Start: Introduction -->
     <section class="intro" id="home">
@@ -170,36 +184,37 @@
 
         <!--Start: Footer -->
         <footer class="footer">
-            <!-- my email -->
-            <a href="mailto:chrisdawolo@gmail.com" class="footer__link">Contact Me</a>
+            <div class="footer-cont">
+                <div class="footer-row">
+                    <div>
+                        <h2><a href="#"> Chris Mehn</a></h2>
+                        <p>Thnak you for visiting my portfolio. I love the oppertunity programming provides me to be creative in my creation. </p>
+                    </div>
+                    <div class="footer-pages">
+                        <h4> Pages </h4>
+                        <ul>
+                            <li><a href="#">HOME</a></li>
+                            <li><a href="#">MY SERVICES</a></li>
+                            <li><a href="#">ABOUT ME</a></li>
+                            <li><a href="#">MY WORK</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Socials</h4>
+                        <div class="socialButton">
+                            <a href="mailto:chrisdawolo@gmail.com"><i class="bx bxl-email"></i> Email</a></li>
+                            <a href=""><i class="bx bxl-twitter"></i> Twitter</a></li>
+                            <a href="https://www.linkedin.com/in/mehnchris/"><i class="bx bxl-linkedln"></i> Linkedln</a></li>
+                        </div>
+                            
+                    </div>
 
-            <ul class="social-list">
-                <li class="social-list__item">
-                    <a class="social-list__link" href="https://codepen.io">
-                        <i class="fab fa-codepen"></i>
-                    </a>
-                </li>
-                <li class="social-list__item">
-                    <a class="social-list__link" href="https://www.linkedin.com/in/christopher-mehn-a42105104/">
-                        <i class="fab fa-dribbble"></i>
-                    </a>
-                </li>
-                <li class="social-list__item">
-                    <a class="social-list__link" href="https://twitter.com">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="social-list__item">
-                    <a class="social-list__link" href="https://github.com">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </li>
-            </ul>
+                </div> 
+            </div> 
+            <div class="copyright">
+                <p>copyright 2022 All Right Reserved</p>
+            </div>
         </footer>
-        <!--End: Footer -->
-        
-        
-        <script src="index.js"></script>
-    
+        <!--End: Footer -->    
 </body>
 </html>

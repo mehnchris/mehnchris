@@ -202,7 +202,7 @@ header
     top: 1em;
     z-index: 1000;
 }
-
+/*Start: Hamburger */
 .hamburger
 {
     display: flex;
@@ -251,12 +251,74 @@ header
 }
 /*End: Header */
 
-
-
-
 /*End: Hamburger*/
-/*End: Header */
 
+/*Start: Greeting notification */
+.notification
+{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 3px;
+    background-color: #141619;
+    color: #16e0bd;
+    box-shadow: 0 1px 10px;
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    animation: fade 4s linear forwards;
+}
+.notification p
+{
+    text-align: center;
+}
+.progress
+{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 100%;
+    height: 3px;
+    background-image: 
+    linear-gradient(to right,
+    #529bdb, #3250bf);
+    border-radius: 4px;
+    animation: progress 5s .35s
+    linear forwards;
+}
+@keyframes fade
+{
+    5% 
+    {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
+    }
+    90%
+    {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    95%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+}
+@keyframes progress
+{
+    to
+    {
+        width: calc(100% -10px);
+    }
+}
+/*End: Greeting notification */
 
 
 /*Start: Intro Section */
@@ -301,8 +363,18 @@ header
         width: calc(100% + 1.5em);
     }
 }
-
 /*End: Intro Section */
+
+/*start: Clock */
+.clock
+{
+    font-family: system-ui;
+    background: gray;
+    color: black;
+    text-align: center;
+    position: relative;      
+}
+/*End: Clock */
 
 /* Start: My services */
 .my-services
@@ -469,23 +541,111 @@ header
 /* End: My Work */
 
 /* Start: Footer */
-.footer 
+.footer
 {
+    padding: 70px 0 0;
+    background-color: rgb(30, 30, 30);
+    box-sizing: border-box;
     width: 100%;
-    background: var(--clr-accent);
-    /*color: var(--clr-dark);*/
+    font-size: 1em;
 }
-.footer li
+.footer .footer-cont
+{
+    max-width: 1170px;
+    margin: auto;
+}
+.footer .footer-pages li
 {
     list-style-type: none;
-    display: flex;
 }
-.footer__link
+.footer .footer-row
 {
-    padding-left: 10em;
-    padding-right: 10em;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    color: rgb(225, 225, 225, 1);
 }
+.footer .footer-row > div:nth-child(1)
+{
+    width: 40%;
+} 
+.footer .footer-row > div
+{
+    width: 30%;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+}
+.footer .footer-row li:hover
+{
+    transform: translateX(0);
+}
+.footer .footer-row ul a
+{
+    text-decoration: none;
+    color: rgb(225, 225, 225, .8);
+    margin-left: 15px;
+}
+.footer .footer-row .socialButton
+{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 20px;
+}
+.footer .footer-row .socialButton i
+{
+    font-size: 28px;
+    text-decoration: none;
+    color: rgb(225, 225, 225);
+    transition: .3s;
+    opacity: .5;
+    transform: translateY(0);
+}
+.footer .footer-row .socialButton i:hover
+{
+    opacity: 1;
+    transform: translateY(-5px);
+}
+.footer .copyright
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    height: 50px;
+    background-color: rgb(30, 30, 30);
+    color: rgb(225, 225, 225, .8);
+    font-size: .8em;
+}
+
+/*Start: Responsive part of footer */
+@media only screen and (max-width: 1170px)
+{
+    .footer .footer-row > div
+    {
+        width: 50% !important;
+        margin-bottom: 30px;
+
+    }
+
+@media only screen and (max-width: 574px)
+    { 
+       .footer .footer-row > div
+       {
+           width: 100% !important;
+       }
+    }
+}
+/*End: Responsive part of footer */
+
 /* End: Footer */
+
+
 
 .mode 
 {
