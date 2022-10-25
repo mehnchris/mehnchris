@@ -572,7 +572,7 @@ header
 .footer .footer-row > div
 {
     width: 30%;
-    padding: 0 25px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -592,14 +592,14 @@ header
 {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
     cursor: pointer;
     width: fit-content;
     margin-top: 20px;
 }
 .footer .footer-row .socialButton i
 {
-    font-size: 28px;
+    font-size: 20px;
     text-decoration: none;
     color: rgb(225, 225, 225);
     transition: .3s;
@@ -644,9 +644,6 @@ header
 /*End: Responsive part of footer */
 
 /* End: Footer */
-
-
-
 .mode 
 {
     float:right;
@@ -677,6 +674,17 @@ header
     background: white;
 }
 /*this is for resume page*/
+
+/*start: page for canvas game*/
+canvas
+{
+    background: #eee;
+    display: flex;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+/*End: page for canvas game*/
+
 .objective h2
 {
     text-decoration: underline;
@@ -702,4 +710,5 @@ hr
 {
     border: 1px solid red;
 }
+
 
