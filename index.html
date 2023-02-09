@@ -13,44 +13,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <!--<link rel="stylesheet" href="https://fontawesome.com/search?s=solid%2Cbrands">-->
-    <link rel="stylesheet" href="brickGame.css">
-    
+    <link rel="stylesheet" href="/index.js">
+    <link rel="stylesheet" href="index2.css">   
+    <link rel="stylesheet" href="index2.js"> 
 
     <title> Chris Portfolio Website </title>
 </head>
 <body>
-    <!-- Start: Header-->
-    <header>
-        <div class="logo">
-            <a href="#home"><img src="navImage2.jpeg" alt=""></a>
-        </div>
-          <!-- start: Greetings notification -->
- <div class="notification">
-            <p> Welcome Back, Lil Topha, reminder that your true <strong>value</strong> is in <u><strong>Jesus Christ</strong></u>!</p>
-            <span class="progress"></span>
-
-        </div>
-    <!-- End: Greetings notification -->
-        <button class="nav-toggle" aria-label="toggle navigation">
-            <span class="hamburger"></span>
-        </button>
-        
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
-                <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
-                <li class="nav__item"><a href="#about" class="nav__link">About me</a></li>
-                <li class="nav__item"><a href="#work" class="nav__link">My Work</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!--End: Header -->
-
-
     <!-- Start: clock --> 
     <div id ="clock" onload="currentTime()" class="clock"></div>
-    <script src="clock.js"></script>
-    <!-- End: clock -->
+    <script src="clock.js"></script> <br>
+    <!--End: clock -->
+
+    <!--Start: header -->
+    <header>
+        <nav class="container">
+            <div class="container-nav__img">
+                <a href="index.html"><img src="navImage2.jpeg" alt=""></a>
+            </div>
+
+            <div class="container__content" id="mainListDiv">
+                <ul class="container__content--contents">
+                    <li><a href=""> HOME </a></li>
+                    <li><a href=""> ABOUT ME </a></li>
+                    <li><a href=""> MY WORK </a></li>
+                    <li><a href=""> CONTACT ME </a></li>
+                </ul>
+            </div>
+            <div class="media_button" id="mediaButton">
+                <button class="main-media__button">
+                    <span></span>
+                    <span></span>
+                    <span></span> 
+                </button>
+
+            </div>
+            <script src="index2.js"></script>
+        </nav>
+        
+    </header>
+    <!--End: header -->
 
     
     <!--Start: Introduction -->
@@ -113,48 +115,12 @@
        <a href="resume.html"> <h3 title="click here to visit my resume page"> Resume Page </h3> </a>
         <div class="line"></div>   
     </div> <br>
-
-    <!-- Brick Breaker Game 
-    <canvas id="myCanvas" width="1160" height="550">  </canvas>
-    <script src="canvas.js"></script>-->
-    <div> Score : <span class="score"></span> Lives : <span class="lives"></span> </div>
-    <div class="container">
-        <script src="brickGame.js"></script>
-    </div>
     
-         <!-- <a href="resume.html" ><button class="resume-button"> Click here to visit my resume page </button></a> -->
+    <!-- <a href="resume.html" ><button class="resume-button"> Click here to visit my resume page </button></a> -->
 
     <!--End: Development model -->
 
-    <!--start: this is some dark mode stuff 
-    <div class="mode">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
-            Dark mode:            
-            <span class="change">OFF</span>
-        </div>
-         
-        <div>                 
-            <h3 style="text-align: center;">Light and Dark Mode</h3>
-             
-            <img src="softwar">
-             <p style="text-align: center;">
-                Click on the switch on top-right of the above image to turn background into dark mode.
-            </p>
-            <script>
-                $( ".change" ).on("click", function() {
-                    if( $( "body" ).hasClass( "dark" )) {
-                        $( "body" ).removeClass( "dark" );
-                        $( ".change" ).text( "OFF" );
-                    } else {
-                        $( "body" ).addClass( "dark" );
-                        $( ".change" ).text( "ON" );
-                    }
-                });
-            </script>
-     
-    </div>
-    end: this is some dark mode stuff -->
-
+    
 
      <!--Start: My Work -->
      <section class="my-work" id="work">
@@ -163,17 +129,17 @@
 
         <!-- 1st portfolio img -->
          <div class="portfolio">
-             <a href="chrisFootball.html" class="portfolio__item">
+             <a href="#" class="portfolio__item">
                  <img src="chrisFootball7.jpeg" alt="" class="portfolio__img">
-                 <p> Football Non-Profit Page </p>
+                 <p> Football Non-Profit Mockup Page coming soon </p>
              </a>
          </div>
 
         <!-- 3st portfolio img -->
         <div class="portfolio">
-            <a href="chrisWebDev.html" class="portfolio__item">
+            <a href="https://mehnchris.github.io/pcypForward/" class="portfolio__item">
                 <img src="software2.webp" alt="" class="portfolio__img">
-                <p> Software Development Page </p> 
+                <p> Capstone Project: Mockup page for Shawnee Forward </p> 
             </a>
         </div>
 
@@ -181,7 +147,7 @@
         <div class="portfolio">
             <a href="chrisSoccer.html" class="portfolio__item">
                 <img src="chris6.jpeg" alt="" class="portfolio__img">
-                <p> Soccer Non-Profit Page</p>
+                <p> Data Analysis Project </p>
             </a>
         </div>
 
@@ -210,7 +176,7 @@
                     </div>
                     <div>
                         <h4>Socials</h4>
-                        <div class="socialButton">
+                        <div class="socialButton" id="socialButtons">
                             <a href="mailto:chrisdawolo@gmail.com">
                                 <i class="bx bxl-email"> Email</i>
                             </a>

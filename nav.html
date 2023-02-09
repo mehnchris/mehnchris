@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Nav </title>
+    <link rel="stylesheet" href="nav.css">
+</head>
+
+<body>
+    <div class="background"></div>
+    <nav class="navbar">
+        <img class="nav-logo" src="ball.png" alt="">
+        <input type="text" placeholder="search" class="navbar-search">
+    </nav>
+    <button class="navbar-burger" onclick="toggleMenu()">
+    </button>
+    <nav class="menu">
+        <a href="#" style="animation-delay: 0.1s"> HOME </a>
+    </nav>
+    <script type="text/javascript">
+        const toggleMenu= ()=>
+        {
+            document.body.classList.toggle("Open")
+        };
+    </script>
+</body>
+</html>

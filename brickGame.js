@@ -57,7 +57,7 @@ function startGame() {
         player.gameover = false;
         gameover.style.display = "none";
         player.score = 0;
-        player.lives = 1;
+        player.lives = 3;
         player.inPlay = false;
         ball.style.display = "block";
         ball.style.left = paddle.offsetLeft + 50 + "px";
@@ -113,25 +113,32 @@ function rColor() {
     return '#' + Math.random().toString(16).substr(-6);
 }
 
-function scoreUpdater() {
+function scoreUpdater() 
+{
     document.querySelector('.score').textContent = player.score;
     document.querySelector('.lives').textContent = player.lives;
 }
 
-function update() {
-    if (!player.gameover) {
+function update() 
+{
+    if (!player.gameover) 
+    {
         let pCurrent = paddle.offsetLeft;
-        if (paddle.left && pCurrent > 0) {
+        if (paddle.left && pCurrent > 0) 
+        {
             pCurrent -= 5;
         }
-        if (paddle.right && (pCurrent < (conDim.width - paddle.offsetWidth))) {
+        if (paddle.right && (pCurrent < (conDim.width - paddle.offsetWidth))) 
+        {
             pCurrent += 5;
         }
         paddle.style.left = pCurrent + 'px';
-        if (!player.inPlay) {
+        if (!player.inPlay) 
+        {
             waitingOnPaddle();
         }
-        else {
+        else 
+        {
             moveBall();
         }
         player.ani = window.requestAnimationFrame(update);

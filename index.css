@@ -52,6 +52,189 @@ body
     font-size: var(--fs-body);
     line-height: 1.5;
 }
+
+/*start nav */
+.container
+{
+    width: 95%;
+    height: auto;
+}
+.container-nav__img
+{
+    width: 150px;
+    height: auto;
+}
+.container-nav__img img
+{
+    width: 100%;
+    border-radius: 45%;
+    background-color: transparent;
+}
+.container__content
+{
+    width: 100%;
+    float: right;
+}
+.container__content--contents
+{
+    display: flex;
+    float: right;
+    padding: 5px;
+    
+}
+.container__content--contents li
+{
+    justify-content: space-between;
+    padding: 10px;
+    list-style-type: none;
+}
+.container__content--contents li a:hover
+{
+    transition: all .3s ease-in-out;
+    color: #16e0bd;
+}
+/*start: hamburger toggle */
+.media_button 
+{
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    display: none;
+}
+
+.media_button button.main_media_button 
+{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.media_button button.main_media_button span
+{
+    width: 98%;
+    height: 1px;
+    display: block;
+    background-color: #fff;
+    margin-top: 9px;
+    margin-bottom: 10px;
+}
+
+.media_button button.main_media_button:hover span:nth-of-type(1){
+    transform: rotateY(180deg);
+    transition: all 0.5s;
+    background-color: #c0c0c0;
+}
+
+.media_button button.main_media_button:hover span:nth-of-type(2){
+    transform: rotateY(180deg);
+    transition: all 0.4s;
+    background-color: #c0c0c0;
+}
+
+.media_button button.main_media_button:hover span:nth-of-type(3){
+    transform: rotateY(180deg);
+    transition: all 0.3s;
+    background-color: #c0c0c0;
+}
+
+.media_button button.active span:nth-of-type(1) {
+    transform: rotate3d(0, 0, 1, 45deg);
+    position: absolute;
+    margin: 0;
+}
+
+.media_button button.active span:nth-of-type(2) {
+    display: none;
+}
+
+.media_button button.active span:nth-of-type(3) {
+    transform: rotate3d(0, 0, 1, -45deg);
+    position: absolute;
+    margin: 0;
+}
+
+.media_button button.active:hover span:nth-of-type(1) {
+    transform: rotate3d(0, 0, 1, 20deg);
+}
+
+.media_button button.active:hover span:nth-of-type(3) {
+    transform: rotate3d(0, 0, 1, -20deg);
+}
+/*start: media inquire*/
+/* Medai qurey section */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    
+    .container{
+        margin: 0;
+    }
+    
+}
+
+
+
+
+@media screen and (max-width:768px) 
+{
+    
+    .container{
+        margin: 1;
+    }
+    
+    .container-nav__img{
+        margin-left: 15px;
+    }
+    
+    .container__content{
+        width: 100%;
+        margin-top: 65px;
+        height: 0px;
+        overflow: hidden;
+    }
+    
+    .container__content--contents{
+        height: 200px;
+    }
+    
+    .container__content ul{
+        flex-direction: column;
+        width: 100%;
+        height: 200px;
+        top: 80px;
+        right: 0;
+        left: 0;
+    }
+    
+    .container__content ul li{
+        width: 100%;
+        height: 40px;
+        background-color:rgba(0,0,255,0.8);
+    }
+    
+    .nav div.main_list ul li a
+    {
+      text-align: center;
+        line-height: 40px;
+        width: 100%;
+        height: 40px;
+        display: table;
+    }
+    
+    .media_button{
+        display: block;
+    }
+}
+/*end: media inquire*/
+
+/*end: hamburger toggle */
+/*end nav */
+
 img
 {
     display: block;
@@ -143,115 +326,127 @@ h3 {font-size: var(--fs-h3)}
 /* End: Styles content and typings */
 /* End: General Properties*/
 
-
 /*Start: Header */
-header
-{
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-}
-.logo
-{
-    max-width: 140px;
-}
 .nav
 {
-    position: relative;
-    background: var(--clr-dark);
-    color: var(--clr-light);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-
-    transform: translateX(0%);
-    transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+    height: 5rem;
+    width: 100%;
+    display: block;
+    justify-content: flex-start;
+    z-index: 10;
+    font-weight: 200;
+    transition: 0.2s ease-in-out;
+    position: absolute;
 }
 .nav__list
 {
     list-style: none;
     display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+    justify-content: flex-end;
+    margin-left: 55vh;
+    margin-top: -49px;
+    padding: 0vh 4vw;
+
 }
+
 .nav__link
 {
     color: inherit;
-    font-weight: var(--fw-bold);
-    font-size: var(--fs-h2);
     text-decoration: none;
-}
-.nav__link:hover
-{ 
-    color: var(--clr-accent);
+    margin-right: 50px;
+    position: relative;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 16px 0;
+    margin: 0 12px;
+    letter-spacing: 1px;
+    line-height: 16px;
+    font-weight: 700;
+    transition: color 0.1, background-color 0.1s, padding 0.2s ease-in;
+    color: #16e0bd;
 }
 .nav-toggle
 {
-    padding: .5em;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
+    display: none;
+}
+.nav__link::before
+{
+    content: "";
+    display: block;
     position: absolute;
-    right: 1em;
-    top: 1em;
-    z-index: 1000;
-}
-/*Start: Hamburger */
-.hamburger
-{
-    display: flex;
-    position: relative;
-
-}
-.hamburger,
-.hamburger::before,
-.hamburger::after
-{
-    background-color: var(--clr-dark);
-    width: 2em;
-    height: 3px;
-    border-radius: 1em;
-    transition: 250s ease-in-out;
-}
-.hamburger::before,
-.hamburger::after
-{
-    content: '';
-    position: absolute;
+    bottom: 3px;
     left: 0;
-    right: 0;
+    height: 3px;
+    width: 100%;
+    background-color: #000;
+    transform-origin: right top;
+    transform: scale(0,1);
+    transition: color 0.1s, transform 0.2s ease-out;
 }
-.hamburger::before { top: 6px; }
-.hamburger::after { bottom: 6px; }
-.nav-open .nav
+.nav__link:active::before
 {
-    transform: translateX(0);
+    background-color: #000;
 }
-.nav-open .nav-toggle
+.nav__link:hover::before,
+.nav__link:focus::before
 {
-    position: fixed;
+    background-origin: left top;
+    transform: scale(1,1);
 }
-.nav-open .hamburger
+.logo
 {
-    transform: rotate(.625turn);
+    padding: 3vh 5vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: rgb(22, 8, 8);
+    width: 17rem;
 }
-.nav-open .hamburger::before
+.logolink
 {
-    transform: rotate(90deg) translateX(-6px);
+    border-radius: 50%;
 }
-.nav-open .hamburger::after
+.smalllogo
 {
-    opacity: 0;
+    display: none;
+}
+a
+{
+    text-decoration: none;
+    color: #111;
+}
+
+@media(max-width)
+{
+    .nav
+    {
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        transform: translateY(100%);
+        transition: transform 250ms cubic-bezier(0.5, 0, 0, 0.5, 1);
+        height: 100vh;
+    }
+    .nav__list
+    {
+        list-style: none;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        text-align: center;
+        margin: 0;
+        padding: 130px;
+        background-color: #111;
+        width: 100%;
+    }
 }
 /*End: Header */
 
-/*End: Hamburger*/
 
 /*Start: Greeting notification */
 .notification
@@ -371,8 +566,10 @@ header
     font-family: system-ui;
     background: gray;
     color: black;
+    position: relative; 
+    width: 100%;    
+    padding: 10 10px; 
     text-align: center;
-    position: relative;      
 }
 /*End: Clock */
 
@@ -538,6 +735,10 @@ header
     transform: scale(1.2);
     opacity: .10;
 }
+.portfolio h3
+{
+    text-overflow: clip;
+}
 /* End: My Work */
 
 /* Start: Footer */
@@ -674,16 +875,6 @@ header
     background: white;
 }
 /*this is for resume page*/
-
-/*start: page for canvas game*/
-canvas
-{
-    background: #eee;
-    display: flex;
-    margin-left: 5em;
-    margin-right: 5em;
-}
-/*End: page for canvas game*/
 
 .objective h2
 {
