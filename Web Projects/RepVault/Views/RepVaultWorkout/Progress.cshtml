@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Progress Tracker";
+    var labels = ViewBag.Labels as List<string>;
+    var values = ViewBag.Values as List<float>;
+    var selected = ViewBag.SelectedExercise as string;
+}
+
+<h2>Progress Tracker</h2>
+
+<form asp-action="Progress" method="get" class="mb-4">
+    <label for="exerciseSelect">Select Exercise:</label>
+    <select name="exerciseName" id="exerciseSelect" class="form-select w-auto d-inline-block mx-2">
+        <option value="">-- Select --</option>
+        @foreach (var item in ViewBag.ExerciseList as SelectList)
+        {
+            <option value="@item.Text" selected="@(item.Text == selected)">
+                @item.Text
+            </option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">View Progress</button>
+</form>
+
+@if (labels.Any())
+{
+    <canvas id="progressChart" width="400" height="200"></canvas>
+
+    @section Scripts {
+        <script>
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(labels)),
+                    datasets: [{
+                        label: 'Weight Lifted (lbs)',
+                        data: @Html.Raw(Json.Serialize(values)),
+                        borderWidth: 2,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    }
+}

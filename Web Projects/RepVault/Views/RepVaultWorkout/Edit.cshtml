@@ -1,0 +1,47 @@
+﻿@model RepVault.Models.RepVaultWorkout
+
+@{
+    ViewData["Title"] = "Edit Workout";
+}
+
+<h2>Edit Workout</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label"></label>
+        <input asp-for="Date" class="form-control" type="datetime-local" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ExerciseName" class="form-label"></label>
+        <input asp-for="ExerciseName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Sets" class="form-label"></label>
+        <input asp-for="Sets" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Reps" class="form-label"></label>
+        <input asp-for="Reps" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Weight" class="form-label"></label>
+        <input asp-for="Weight" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="MuscleGroup" class="form-label"></label>
+        <input asp-for="MuscleGroup" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+    <div class="mb-3 form-check">
+        <input asp-for="IsCustomExercise" class="form-check-input" />
+        <label asp-for="IsCustomExercise" class="form-check-label">Custom Exercise</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="History" class="btn btn-secondary">Cancel</a>
+</form>

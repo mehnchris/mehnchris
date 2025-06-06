@@ -1,0 +1,65 @@
+﻿@model List<RepVault.Models.RepVaultGoal>
+@{
+    ViewData["Title"] = "My Goals";
+}
+
+<h2>My Goals</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">Add New Goal</a>
+
+@if (TempData["GoalSuccess"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["GoalSuccess"]
+    </div>
+}
+
+
+@if (!Model.Any())
+{
+    <p>You haven't set any goals yet.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var goal in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm p-3">
+                    <h4>@goal.GoalTitle</h4>
+                    <p><strong>Target:</strong> @goal.TargetValue @goal.Unit</p>
+                    <p><strong>Deadline:</strong> @goal.TargetDate.ToShortDateString()</p>
+                    <div id="countdown-@goal.Id" class="fw-bold text-primary"></div>
+                </div>
+            </div>
+
+            <script>
+    (function () {
+        const deadline = new Date("@goal.TargetDate.ToString("yyyy-MM-dd")");
+        const countdownElement = document.getElementById("countdown-@goal.Id");
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = deadline - now;
+
+            if (timeLeft <= 0) {
+                countdownElement.innerText = "Goal deadline reached!";
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+            const seconds = Math.floor((timeLeft / 1000) % 60);
+
+            countdownElement.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+</script>
+
+        }
+    </div>
+}

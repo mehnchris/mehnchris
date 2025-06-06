@@ -1,0 +1,46 @@
+﻿@model IEnumerable<RepVault.Models.RepVaultWorkout>
+
+@{
+    ViewData["Title"] = "Workout History";
+}
+
+<h2>Workout History</h2>
+
+@if (!Model.Any())
+{
+    <p>No workouts logged yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Weight</th>
+                <th>Muscle Group</th>
+                <th>Notes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var workout in Model)
+            {
+                <tr>
+                    <td>@workout.Date.ToShortDateString()</td>
+                    <td>@workout.ExerciseName</td>
+                    <td>@workout.Sets</td>
+                    <td>@workout.Reps</td>
+                    <td>@workout.Weight</td>
+                    <td>@workout.MuscleGroup</td>
+                    <td>@workout.Notes</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@workout.Id" class="btn btn-sm btn-warning">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

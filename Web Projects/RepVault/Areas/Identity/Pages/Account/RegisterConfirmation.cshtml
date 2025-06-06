@@ -1,0 +1,29 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Confirm your email";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="alert alert-info">
+    <p>
+        Thank you for signing up with <strong>RepVault</strong>!
+    </p>
+    <p>
+        We've sent a confirmation link to <strong>@Model.Email</strong>.
+        Please click the link in your email to confirm your account and begin logging your workouts.
+    </p>
+
+    @if (Model.DisplayConfirmAccountLink)
+    {
+        <p class="mt-3">
+            <strong>Dev Only:</strong> Your app doesn't yet have a real email sender configured.<br />
+            To confirm your account manually, use this temporary confirmation link:<br />
+            <a href="@Model.EmailConfirmationUrl">@Model.EmailConfirmationUrl</a>
+        </p>
+    }
+
+    <p class="mt-3">
+        Didn’t receive the email? Be sure to check your spam folder or <a asp-page="/Account/Login">try logging in</a> again.
+    </p>
+</div>
