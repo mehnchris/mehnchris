@@ -26,6 +26,11 @@ namespace RepVault.Models
         [Required(ErrorMessage = "Please enter the muscle group.")]
         public string? MuscleGroup { get; set; }
 
+        //use this for grouping, tracking, and comparisons instead of just the raw ExerciseName
+        public string? CanonicalExerciseName { get; set; }
+
+        
+
         public string? Notes { get; set; }
 
         public bool IsCustomExercise { get; set; } = false;

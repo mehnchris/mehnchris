@@ -78,3 +78,18 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+@if (TempData["WorkoutSuggestion"] != null)
+{
+    <div class="alert alert-warning">
+        Did you mean: <strong>@TempData["WorkoutSuggestion"]</strong>? 
+        We’ll treat it as the same for tracking purposes.
+    </div>
+}
+@* @if (TempData["CustomExerciseWarning"] != null)
+{
+    <div class="alert alert-info">
+        <strong>Note:</strong> Custom exercises are not tracked in the same way as standard exercises.
+        Please ensure you log them correctly.
+    </div>
+} *@

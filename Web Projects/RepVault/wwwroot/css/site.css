@@ -37,3 +37,20 @@ body {
     max-width: 600px;
     margin: 0 auto;
 }
+
+:root {
+    --bg-color: #fff;
+    --text-color: #000;
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+

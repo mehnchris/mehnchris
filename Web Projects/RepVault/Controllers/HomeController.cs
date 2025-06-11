@@ -1,82 +1,108 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RepVault.Data;
 using RepVault.Models;
+using RepVault.ViewModels;
+using System.Linq;
 
 namespace RepVault.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly RepVaultDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            RepVaultDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
+            _context = context;
+            _userManager = userManager;
         }
 
+        // Public homepage
         public IActionResult Index()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(); // Views/Home/Index.cshtml (for unauthenticated users)
+        }
+
+        // Authenticated user dashboard
+        [Authorize]
+        public async Task<IActionResult> Dashboard()
+        {
+            // Generate a dynamic time-based greeting
             var hour = DateTime.Now.Hour;
-            string greeting;
-
-            if (hour >= 5 && hour < 12)
-            {
-                greeting = "Rise and grind! It’s a new day to crush your goals ??";
-            }
-            else if (hour >= 12 && hour < 17)
-            {
-                greeting = "Power through your afternoon — your gains won’t wait ??";
-            }
-            else if (hour >= 17 && hour < 22)
-            {
-                greeting = "Finish strong — your future self will thank you ???";
-            }
-            else
-            {
-                greeting = "Even legends train after dark ?? No excuses.";
-            }
-
+            var rng = new Random();
 
             var morningGreetings = new[]
-{
-    "Rise and grind! It’s a new day to crush your goals 💥",
-    "Let the reps begin — the early pump gets the gains ☀️",
-    "Mornings are for warriors. Time to lift and conquer 🛡️"
-};
+            {
+                "Rise and grind! It’s a new day to crush your goals 💥",
+                "Let the reps begin — the early pump gets the gains ☀️",
+                "Mornings are for warriors. Time to lift and conquer 🛡️"
+            };
 
             var afternoonGreetings = new[]
             {
-    "Power through your afternoon — your gains won’t wait 🔥",
-    "Lunch is fuel. Strength is built in sweat, not comfort 💪",
-    "Midday motivation: show the iron who’s boss 🏋️"
-};
+                "Power through your afternoon — your gains won’t wait 🔥",
+                "Lunch is fuel. Strength is built in sweat, not comfort 💪",
+                "Midday motivation: show the iron who’s boss 🏋️"
+            };
 
             var eveningGreetings = new[]
             {
-    "Finish strong — your future self will thank you 🏋️",
-    "Evenings are built for discipline. Own your progress 💯",
-    "No one regrets a workout. Let's end the day like a beast 🐺"
-};
+                "Finish strong — your future self will thank you 🏋️",
+                "Evenings are built for discipline. Own your progress 💯",
+                "No one regrets a workout. Let's end the day like a beast 🐺"
+            };
 
             var nightGreetings = new[]
             {
-    "Even legends train after dark 🌙 No excuses.",
-    "The grind doesn’t sleep — neither do your dreams ✨",
-    "While others rest, you rise. Late-night sets incoming ⚡"
-};
+                "Even legends train after dark 🌙 No excuses.",
+                "The grind doesn’t sleep — neither do your dreams ✨",
+                "While others rest, you rise. Late-night sets incoming ⚡"
+            };
 
-            var rng = new Random();
-            if (hour >= 5 && hour < 12)
-                greeting = morningGreetings[rng.Next(morningGreetings.Length)];
-            else if (hour >= 12 && hour < 17)
-                greeting = afternoonGreetings[rng.Next(afternoonGreetings.Length)];
-            else if (hour >= 17 && hour < 22)
-                greeting = eveningGreetings[rng.Next(eveningGreetings.Length)];
-            else
-                greeting = nightGreetings[rng.Next(nightGreetings.Length)];
-
+            string greeting = hour switch
+            {
+                >= 5 and < 12 => morningGreetings[rng.Next(morningGreetings.Length)],
+                >= 12 and < 17 => afternoonGreetings[rng.Next(afternoonGreetings.Length)],
+                >= 17 and < 22 => eveningGreetings[rng.Next(eveningGreetings.Length)],
+                _ => nightGreetings[rng.Next(nightGreetings.Length)]
+            };
 
             ViewBag.DynamicGreeting = greeting;
-            return View();
+
+            // Load user-specific data
+            var user = await _userManager.GetUserAsync(User);
+
+            var latestWorkouts = _context.RepVaultWorkouts
+                .Where(w => w.UserId == user.Id)
+                .OrderByDescending(w => w.Date)
+                .Take(5)
+                .ToList();
+
+            var activeGoals = _context.RepVaultGoals
+                .Where(g => g.UserId == user.Id && g.TargetDate >= DateTime.Today)
+                .OrderBy(g => g.TargetDate)
+                .ToList();
+
+            var model = new DashboardViewModel
+            {
+                LatestWorkouts = latestWorkouts,
+                ActiveGoals = activeGoals
+            };
+
+            return View(model); // Views/Home/Dashboard.cshtml
         }
 
         public IActionResult Privacy()

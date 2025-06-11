@@ -7,7 +7,7 @@ namespace RepVault.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        
         public string? UserId { get; set; }
 
         [Required]
@@ -19,12 +19,12 @@ namespace RepVault.Models
         public float TargetValue { get; set; }
 
         [Required]
-        public string ?Unit { get; set; } // e.g. "lbs", "reps"
+        public string ?Unit { get; set; } // "lbs", "reps"
 
-        [Required]
+        [Required]  
         public DateTime TargetDate { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual ApplicationUser ?User { get; set; }
+        public virtual ApplicationUser? User { get; set; }
     }
 }
