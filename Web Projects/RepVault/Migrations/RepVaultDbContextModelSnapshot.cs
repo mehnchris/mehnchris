@@ -224,6 +224,42 @@ namespace RepVault.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("RepVault.Models.RepVaultCardioWorkout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ActivityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float?>("Distance")
+                        .HasColumnType("real");
+
+                    b.Property<string>("DistanceUnit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Duration")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RepVaultCardioWorkouts");
+                });
+
             modelBuilder.Entity("RepVault.Models.RepVaultExercise", b =>
                 {
                     b.Property<int>("Id")

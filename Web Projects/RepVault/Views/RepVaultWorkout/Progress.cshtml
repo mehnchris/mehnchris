@@ -1,56 +1,126 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering
-@{
-    ViewData["Title"] = "Progress Tracker";
+﻿@{
+    ViewData["Title"] = "Workout Progress";
+    var selected = ViewBag.SelectedExercise as string;
+    var workoutType = ViewBag.WorkoutType as string ?? "Strength";
+    var exercises = ViewBag.ExerciseList as SelectList;
     var labels = ViewBag.Labels as List<string>;
     var values = ViewBag.Values as List<float>;
-    var selected = ViewBag.SelectedExercise as string;
 }
 
-<h2>Progress Tracker</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Track Your Progress</h2>
 
-<form asp-action="Progress" method="get" class="mb-4">
-    <label for="exerciseSelect">Select Exercise:</label>
-    <select name="exerciseName" id="exerciseSelect" class="form-select w-auto d-inline-block mx-2">
-        <option value="">-- Select --</option>
-        @foreach (var item in ViewBag.ExerciseList as SelectList)
-        {
-            <option value="@item.Text" selected="@(item.Text == selected)">
-                @item.Text
-            </option>
-        }
-    </select>
-    <button type="submit" class="btn btn-primary">View Progress</button>
-</form>
+    <form method="get" asp-action="Progress" class="mb-4 text-center" id="progressForm">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <label class="form-label">Workout Type</label>
+                <select name="workoutType" class="form-select" onchange="filterExercises()">
+                    <option value="Strength" selected="@((workoutType == "Strength") ? "selected" : null)">Strength</option>
+                    <option value="Cardio" selected="@((workoutType == "Cardio") ? "selected" : null)">Cardio</option>
+                </select>
+            </div>
 
-@if (labels.Any())
-{
-    <canvas id="progressChart" width="400" height="200"></canvas>
+            <div class="col-md-4">
+                <label class="form-label">Exercise</label>
+                <select name="exerciseName" class="form-select">
+                    <option value="">-- Select Exercise --</option>
+                    @foreach (var item in exercises)
+                    {
+                        <option value="@item.Text" selected="@(item.Text == selected ? "selected" : null)">
+                            @item.Text
+                        </option>
+                    }
+                </select>
+            </div>
 
-    @section Scripts {
+            <div class="col-md-2">
+                <label class="form-label">Chart Type</label>
+                <select id="chartType" class="form-select" onchange="updateChart()">
+                    <option value="line">Line</option>
+                    <option value="bar">Bar</option>
+                </select>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">View Progress</button>
+            </div>
+        </div>
+    </form>
+
+    @if (values != null && values.Any())
+    {
+        <div class="card shadow-sm bg-light dark-mode-card mt-3">
+            <div class="card-header bg-info text-white text-center">
+                @workoutType Progress - @selected
+            </div>
+            <div class="card-body">
+                <canvas id="progressChart"></canvas>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
+            const labels = @Html.Raw(Json.Serialize(labels));
+            const values = @Html.Raw(Json.Serialize(values));
+            let chart;
             const ctx = document.getElementById('progressChart').getContext('2d');
-            const chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: @Html.Raw(Json.Serialize(labels)),
-                    datasets: [{
-                        label: 'Weight Lifted (lbs)',
-                        data: @Html.Raw(Json.Serialize(values)),
-                        borderWidth: 2,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        tension: 0.3,
-                        fill: true
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+
+            function createChart(type) {
+                if (chart) {
+                    chart.destroy();
+                }
+
+                chart = new Chart(ctx, {
+                    type: type,
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '@(workoutType == "Cardio" ? "Distance (Miles/Km)" : "Weight (lbs)")',
+                            data: values,
+                            backgroundColor: type === "bar" ? 'rgba(0, 123, 255, 0.6)' : 'transparent',
+                            borderColor: 'skyblue',
+                            borderWidth: 2,
+                            fill: type === "line",
+                            tension: 0.3,
+                            pointBackgroundColor: 'white',
+                            pointBorderColor: 'skyblue'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '@(workoutType == "Cardio" ? "Distance" : "Weight")'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            }
                         }
                     }
-                }
+                });
+            }
+
+            function updateChart() {
+                const type = document.getElementById("chartType").value;
+                createChart(type);
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                createChart("line");
             });
         </script>
     }
-}
+    else if (!string.IsNullOrEmpty(selected))
+    {
+        <div class="alert alert-warning text-center mt-4">
+            No progress data found for "<strong>@selected</strong>" yet.
+        </div>
+    }
+</div>

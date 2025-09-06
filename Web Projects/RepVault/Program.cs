@@ -8,7 +8,7 @@ using RepVault.RepVaultServices;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure the database connection (ensure RepVaultConnection exists in Azure Configuration)
-var connectionString = builder.Configuration.GetConnectionString("RepVaultConnection")
+var connectionString = builder.Configuration.GetConnectionString("RepVaultContextConnection") //change this to match your connection string name
     ?? throw new InvalidOperationException("Connection string 'RepVaultConnection' not found.");
 
 builder.Services.AddDbContext<RepVaultDbContext>(options =>

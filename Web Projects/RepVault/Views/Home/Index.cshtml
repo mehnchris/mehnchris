@@ -1,48 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Welcome to RepVault";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="hero text-white text-center d-flex align-items-center justify-content-center" style="height: 90vh; background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.6)), url('/images/hero-fitness.jpg') center/cover no-repeat;">
-    <div>
-        <h1 class="display-4 fw-bold">Track. Grow. Dominate.</h1>
-        <p class="lead mt-3 fw-semibold text-light">@ViewBag.DynamicGreeting</p>
-        <p class="lead mb-4">RepVault helps you turn your notebook into smart progress. Workout logging made for real results.</p>
-        <a href="/Identity/Account/Register" class="btn btn-success btn-lg me-3">Get Started</a>
-        <a href="/Identity/Account/Login" class="btn btn-outline-light btn-lg">Login</a>
-    </div>
-</section>
-
-<section class="container py-5">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold">Why RepVault?</h2>
-        <p class="text-muted">From dumbbells to data — we help you level up.</p>
-    </div>
-    <div class="row text-center g-4">
-        <div class="col-md-4">
-            <div class="shadow-sm p-4 rounded bg-light h-100">
-                <h4>📓 Log Workouts</h4>
-                <p>Easily track sets, reps, weight, notes, and muscle group — all from your phone or desktop.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="shadow-sm p-4 rounded bg-light h-100">
-                <h4>📈 Visual Progress</h4>
-                <p>View graphs to monitor your gains, lift history, and trends across any exercise.</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="shadow-sm p-4 rounded bg-light h-100">
-                <h4>🎯 Set Goals</h4>
-                <p>Create workout goals with countdowns to stay accountable and consistent.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bg-dark text-white text-center py-5">
+<section class="hero text-center py-5">
     <div class="container">
-        <h3 class="mb-3">Your fitness journey deserves better than paper.</h3>
-        <p class="lead">Join RepVault today and bring structure to your strength.</p>
-        <a href="/Identity/Account/Register" class="btn btn-primary btn-lg">Create My Free Account</a>
+        <h1 class="display-4 fw-bold">Track. Transform. Triumph.</h1>
+        <p class="lead mt-3">RepVault is your all-in-one fitness log — from strength sets to cardio strides.</p>
+        <a class="btn btn-primary btn-lg mt-4" asp-area="" asp-controller="Account" asp-action="Register">Join the Vault</a>
+    </div>
+</section>
+
+<section class="features py-5 bg-gradient">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-bar-chart-line fs-1 text-primary"></i>
+                <h4 class="mt-3">Progress Charts</h4>
+                <p>Visualize your gains and monitor your goals over time with clean, dynamic charts.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-heart-pulse fs-1 text-danger"></i>
+                <h4 class="mt-3">Cardio Logging</h4>
+                <p>Track your runs, rides, and rows — distance, duration, and heart-pumping intensity.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-moon-stars fs-1 text-warning"></i>
+                <h4 class="mt-3">Dark Mode</h4>
+                <p>Seamlessly toggle themes for comfort — RepVault supports your grind day or night.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta text-center py-5">
+    <div class="container">
+        <h2 class="mb-4">Ready to Level Up?</h2>
+        <a class="btn btn-outline-light btn-lg" asp-controller="Account" asp-action="Register">Create Your Free Account</a>
     </div>
 </section>

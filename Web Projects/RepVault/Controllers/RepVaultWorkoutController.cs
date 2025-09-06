@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RepVault.Data;
-using RepVault.Models;
 using RepVault.Helpers;
-
-using System.Web.Helpers;
+using RepVault.Models;
+using RepVault.ViewModels;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using System.IO;
+using System.Web.Helpers;
 
 namespace RepVault.Controllers
 {
@@ -36,44 +36,82 @@ namespace RepVault.Controllers
             });
         }
 
-        public async Task<IActionResult> Progress(string exerciseName = null)
+        public async Task<IActionResult> Progress(string workoutType = "Strength", string exerciseName = null)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
                 return Challenge();
 
-            // Get unique exercise names for dropdown
-            var exercises = _context.RepVaultWorkouts
-                .Where(w => w.UserId == user.Id)
-                .Select(w => w.ExerciseName)
-                .Distinct()
-                .ToList();
-
-            ViewBag.ExerciseList = new SelectList(exercises);
+            ViewBag.WorkoutType = workoutType;
             ViewBag.SelectedExercise = exerciseName;
 
-            if (string.IsNullOrEmpty(exerciseName))
+            if (workoutType == "Cardio")
             {
-                ViewBag.Labels = new List<string>();
-                ViewBag.Values = new List<float>();
-                return View();
-            }
+                var cardioExercises = _context.RepVaultCardioWorkouts
+                    .Where(w => w.UserId == user.Id && !string.IsNullOrEmpty(w.ActivityType))
+                    .Select(w => w.ActivityType)
+                    .Distinct()
+                    .ToList();
 
-            var chartData = _context.RepVaultWorkouts
-                .Where(w => w.UserId == user.Id && w.ExerciseName == exerciseName)
-                .OrderBy(w => w.Date)
-                .Select(w => new
+                ViewBag.ExerciseList = new SelectList(cardioExercises);
+
+                if (!string.IsNullOrEmpty(exerciseName))
                 {
-                    Date = w.Date.ToString("MM/dd/yyyy"),
-                    Weight = w.Weight
-                })
-                .ToList();
+                    var chartData = _context.RepVaultCardioWorkouts
+                        .Where(w => w.UserId == user.Id && w.ActivityType == exerciseName)
+                        .OrderBy(w => w.Date)
+                        .Select(w => new
+                        {
+                            Date = w.Date.ToString("MM/dd/yyyy"),
+                            Distance = w.Distance ?? 0
+                        })
+                        .ToList();
 
-            ViewBag.Labels = chartData.Select(d => d.Date).ToList();
-            ViewBag.Values = chartData.Select(d => d.Weight).ToList();
+                    ViewBag.Labels = chartData.Select(d => d.Date).ToList();
+                    ViewBag.Values = chartData.Select(d => d.Distance).ToList();
+                }
+                else
+                {
+                    ViewBag.Labels = new List<string>();
+                    ViewBag.Values = new List<float>();
+                }
+            }
+            else // Strength
+            {
+                var strengthExercises = _context.RepVaultWorkouts
+                    .Where(w => w.UserId == user.Id && !string.IsNullOrEmpty(w.ExerciseName))
+                    .Select(w => w.ExerciseName)
+                    .Distinct()
+                    .ToList();
+
+                ViewBag.ExerciseList = new SelectList(strengthExercises);
+
+                if (!string.IsNullOrEmpty(exerciseName))
+                {
+                    var chartData = _context.RepVaultWorkouts
+                        .Where(w => w.UserId == user.Id && w.ExerciseName == exerciseName)
+                        .OrderBy(w => w.Date)
+                        .Select(w => new
+                        {
+                            Date = w.Date.ToString("MM/dd/yyyy"),
+                            Weight = w.Weight
+                        })
+                        .ToList();
+
+                    ViewBag.Labels = chartData.Select(d => d.Date).ToList();
+                    ViewBag.Values = chartData.Select(d => d.Weight).ToList();
+                }
+                else
+                {
+                    ViewBag.Labels = new List<string>();
+                    ViewBag.Values = new List<float>();
+                }
+            }
 
             return View();
         }
+
+
 
         [HttpGet]
         public IActionResult ProgressChartPreview()
@@ -163,13 +201,55 @@ namespace RepVault.Controllers
                 return Challenge();
             }
 
-            var workouts = _context.RepVaultWorkouts
+            var strengthWorkouts = _context.RepVaultWorkouts
                 .Where(w => w.UserId == user.Id)
                 .OrderByDescending(w => w.Date)
                 .ToList();
 
-            return View(workouts);
+            var cardioWorkouts = _context.RepVaultCardioWorkouts
+                .Where(w => w.UserId == user.Id)
+                .OrderByDescending(w => w.Date)
+                .ToList();
+
+            var viewModel = new CombinedWorkoutHistoryViewModel
+            {
+                StrengthWorkouts = strengthWorkouts,
+                CardioWorkouts = cardioWorkouts
+            };
+
+            return View(viewModel);
         }
+
+
+        // GET: /RepVaultWorkout/LogCardio
+        public IActionResult LogCardio()
+        {
+            return View(new RepVaultCardioWorkout { Date = DateTime.Now });
+        }
+
+        // POST: /RepVaultWorkout/LogCardio
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogCardio(RepVaultCardioWorkout cardioWorkout)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return Challenge();
+
+            cardioWorkout.UserId = user.Id;
+
+            if (ModelState.IsValid)
+            {
+                _context.RepVaultCardioWorkouts.Add(cardioWorkout);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Cardio workout logged successfully!";
+                return RedirectToAction("LogCardio");
+            }
+
+            ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            return View(cardioWorkout);
+        }
+
 
         // GET: /RepVaultWorkout/Edit/5
         public async Task<IActionResult> Edit(int? id)

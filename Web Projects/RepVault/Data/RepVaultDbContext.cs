@@ -16,6 +16,8 @@ namespace RepVault.Data
         public DbSet<RepVaultWorkout> RepVaultWorkouts { get; set; }
         public DbSet<RepVaultExercise> RepVaultExercises { get; set; } // optional: for fixed list
         public DbSet<RepVaultGoal> RepVaultGoals { get; set; }
+        public DbSet<RepVaultCardioWorkout> RepVaultCardioWorkouts { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)

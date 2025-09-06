@@ -54,3 +54,43 @@ body {
     color: var(--text-color);
 }
 
+/* Enable dropdown on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* Optional: aligns menu with navbar */
+}
+
+.hero {
+    background: linear-gradient(to right, #0d0d0d, #1f1f1f);
+    color: var(--text-color);
+}
+
+.features {
+    background-color: #181818;
+    color: var(--text-color);
+}
+
+    .features h4 {
+        color: #f8f9fa;
+    }
+
+.cta {
+    background-color: #0a0a0a;
+    color: #f0f0f0;
+}
+
+    .cta .btn-outline-light:hover {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+    }
+
+.bi {
+    transition: transform 0.3s;
+}
+
+    .bi:hover {
+        transform: scale(1.2);
+    }
+
+
