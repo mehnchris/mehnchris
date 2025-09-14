@@ -239,14 +239,14 @@ namespace RepVault.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<float?>("Distance")
-                        .HasColumnType("real");
+                    b.Property<double?>("Distance")
+                        .HasColumnType("float");
 
                     b.Property<string>("DistanceUnit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Duration")
-                        .HasColumnType("real");
+                    b.Property<double>("Duration")
+                        .HasColumnType("float");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");

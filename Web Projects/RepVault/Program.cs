@@ -7,16 +7,13 @@ using RepVault.RepVaultServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure the database connection (ensure RepVaultConnection exists in Azure Configuration)
-var connectionString = builder.Configuration.GetConnectionString("RepVaultContextConnection") //change this to match your connection string name
+// ✅ Use one consistent connection string key
+var connectionString = builder.Configuration.GetConnectionString("RepVaultConnection")
     ?? throw new InvalidOperationException("Connection string 'RepVaultConnection' not found.");
 
+// ✅ Register DbContext with retry logic
 builder.Services.AddDbContext<RepVaultDbContext>(options =>
-    options.UseSqlServer(connectionString));
-
-builder.Services.AddDbContext<RepVaultDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("RepVaultConnection"),
+    options.UseSqlServer(connectionString,
         sqlOptions => sqlOptions.EnableRetryOnFailure(
             maxRetryCount: 5,
             maxRetryDelay: TimeSpan.FromSeconds(10),
@@ -25,8 +22,7 @@ builder.Services.AddDbContext<RepVaultDbContext>(options =>
     )
 );
 
-
-// Identity setup with email confirmation and unique emails
+// ✅ Identity setup with email confirmation and unique emails
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
@@ -34,17 +30,17 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
 .AddEntityFrameworkStores<RepVaultDbContext>();
 
-// Email service (ensure SendGrid is configured in production)
+// ✅ Email service using SendGrid
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-// Dev exception filter
+// ✅ MVC & Razor Pages
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Middleware setup
+// ✅ Middleware pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -52,14 +48,15 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts(); // Enforce HTTPS in production
+    app.UseHsts(); // Enforce HTTPS
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(); // Ensure this is here so styles/js work after deployment
+app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication(); // ✅ Needed for Identity
+
+app.UseAuthentication(); // Identity login
 app.UseAuthorization();
 
 app.MapControllerRoute(
