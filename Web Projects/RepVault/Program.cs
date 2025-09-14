@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using RepVault.Data;
@@ -7,11 +8,11 @@ using RepVault.RepVaultServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Use one consistent connection string key
+// ✅ Ensure correct connection string key
 var connectionString = builder.Configuration.GetConnectionString("RepVaultConnection")
     ?? throw new InvalidOperationException("Connection string 'RepVaultConnection' not found.");
 
-// ✅ Register DbContext with retry logic
+// ✅ Configure DbContext with retry logic
 builder.Services.AddDbContext<RepVaultDbContext>(options =>
     options.UseSqlServer(connectionString,
         sqlOptions => sqlOptions.EnableRetryOnFailure(
@@ -22,18 +23,20 @@ builder.Services.AddDbContext<RepVaultDbContext>(options =>
     )
 );
 
-// ✅ Identity setup with email confirmation and unique emails
+// ✅ Identity setup with UI and email confirmation
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
     options.User.RequireUniqueEmail = true;
 })
-.AddEntityFrameworkStores<RepVaultDbContext>();
+.AddEntityFrameworkStores<RepVaultDbContext>()
+.AddDefaultUI(); // <-- This line is required for /Account/Login to work
+// AddDefaultTokenProviders(); // Optional if you're doing password reset, 2FA, etc.
 
-// ✅ Email service using SendGrid
+// ✅ Email service via SendGrid
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
-// ✅ MVC & Razor Pages
+// ✅ MVC, Razor Pages, Exception Filters
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -48,7 +51,7 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts(); // Enforce HTTPS
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -56,13 +59,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Identity login
+app.UseAuthentication();
 app.UseAuthorization();
 
+// ✅ Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// ✅ Razor Pages for Identity UI
 app.MapRazorPages();
 
 app.Run();
